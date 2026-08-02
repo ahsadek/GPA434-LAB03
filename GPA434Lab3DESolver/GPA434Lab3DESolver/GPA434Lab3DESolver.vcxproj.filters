@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>qml;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>qrc;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Translation Files">
+      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
+      <Extensions>ts</Extensions>
+    </Filter>
+    <Filter Include="Header Files\ApplicationPanels">
+      <UniqueIdentifier>{ee4541ec-e420-44a6-8e1f-29e5436b6acf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ApplicationPanels">
+      <UniqueIdentifier>{484e9146-2e6d-4b71-882e-d9fda9f19587}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ProblemToSolveSubPanels">
+      <UniqueIdentifier>{604665e9-18b5-4a83-820b-d488bf76ac6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ProblemToSolveSubPanels">
+      <UniqueIdentifier>{6ed9dd65-4569-487e-9566-c6267168d410}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WidgetUtilities">
+      <UniqueIdentifier>{0093db82-2b25-442e-8279-1e8aca8f72b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\WidgetUtilities">
+      <UniqueIdentifier>{bc7fac40-9eeb-471b-8de4-a94d753f0ffb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="GPA434Lab3DESolver.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtUic Include="GPA434Lab3DESolver.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtMoc Include="GPA434Lab3DESolver.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClCompile Include="GPA434Lab3DESolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QImageViewer.cpp">
+      <Filter>Source Files\WidgetUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="QElidedLabel.cpp">
+      <Filter>Source Files\WidgetUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEPeakPanel.cpp">
+      <Filter>Source Files\ProblemToSolveSubPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEOpenBoxPanel.cpp">
+      <Filter>Source Files\ProblemToSolveSubPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEBestResultPanel.cpp">
+      <Filter>Source Files\ApplicationPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEControllerPanel.cpp">
+      <Filter>Source Files\ApplicationPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEEngineParametersPanel.cpp">
+      <Filter>Source Files\ApplicationPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEHistoryChartPanel.cpp">
+      <Filter>Source Files\ApplicationPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="QDESolutionPanel.cpp">
+      <Filter>Source Files\ApplicationPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="QDESolutionTabPanel.cpp">
+      <Filter>Source Files\ApplicationPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEAdapter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QImageViewer.h">
+      <Filter>Header Files\WidgetUtilities</Filter>
+    </QtMoc>
+    <QtMoc Include="QElidedLabel.h">
+      <Filter>Header Files\WidgetUtilities</Filter>
+    </QtMoc>
+    <QtMoc Include="QDEPeakPanel.h">
+      <Filter>Header Files\ProblemToSolveSubPanels</Filter>
+    </QtMoc>
+    <QtMoc Include="QDEOpenBoxPanel.h">
+      <Filter>Header Files\ProblemToSolveSubPanels</Filter>
+    </QtMoc>
+    <QtMoc Include="QDEBestResultPanel.h">
+      <Filter>Header Files\ApplicationPanels</Filter>
+    </QtMoc>
+    <QtMoc Include="QDEControllerPanel.h">
+      <Filter>Header Files\ApplicationPanels</Filter>
+    </QtMoc>
+    <QtMoc Include="QDEEngineParametersPanel.h">
+      <Filter>Header Files\ApplicationPanels</Filter>
+    </QtMoc>
+    <QtMoc Include="QDEHistoryChartPanel.h">
+      <Filter>Header Files\ApplicationPanels</Filter>
+    </QtMoc>
+    <QtMoc Include="QDESolutionPanel.h">
+      <Filter>Header Files\ApplicationPanels</Filter>
+    </QtMoc>
+    <QtMoc Include="QDESolutionTabPanel.h">
+      <Filter>Header Files\ApplicationPanels</Filter>
+    </QtMoc>
+    <QtMoc Include="QDEAdapter.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+</Project>
