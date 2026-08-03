@@ -70,6 +70,21 @@
     <ClCompile Include="QDEOpenBoxPanel.cpp">
       <Filter>Source Files\ProblemToSolveSubPanels</Filter>
     </ClCompile>
+    <ClCompile Include="QDEGeometricPanel.cpp">
+      <Filter>Source Files\ProblemToSolveSubPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="PolygonBuilder.cpp">
+      <Filter>Source Files\ProblemToSolveSubPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleBuilder.cpp">
+      <Filter>Source Files\ProblemToSolveSubPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="RectangleBuilder.cpp">
+      <Filter>Source Files\ProblemToSolveSubPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="LShapeBuilder.cpp">
+      <Filter>Source Files\ProblemToSolveSubPanels</Filter>
+    </ClCompile>
     <ClCompile Include="QDEBestResultPanel.cpp">
       <Filter>Source Files\ApplicationPanels</Filter>
     </ClCompile>
@@ -105,6 +120,9 @@
     <QtMoc Include="QDEOpenBoxPanel.h">
       <Filter>Header Files\ProblemToSolveSubPanels</Filter>
     </QtMoc>
+    <QtMoc Include="QDEGeometricPanel.h">
+      <Filter>Header Files\ProblemToSolveSubPanels</Filter>
+    </QtMoc>
     <QtMoc Include="QDEBestResultPanel.h">
       <Filter>Header Files\ApplicationPanels</Filter>
     </QtMoc>
@@ -126,5 +144,17 @@
     <QtMoc Include="QDEAdapter.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <ClInclude Include="PolygonBuilder.h">
+      <Filter>Header Files\ProblemToSolveSubPanels</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleBuilder.h">
+      <Filter>Header Files\ProblemToSolveSubPanels</Filter>
+    </ClInclude>
+    <ClInclude Include="RectangleBuilder.h">
+      <Filter>Header Files\ProblemToSolveSubPanels</Filter>
+    </ClInclude>
+    <ClInclude Include="LShapeBuilder.h">
+      <Filter>Header Files\ProblemToSolveSubPanels</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

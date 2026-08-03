@@ -11,6 +11,7 @@
 #include "QDEControllerPanel.h"
 #include "QDEEngineParametersPanel.h"
 #include "QDEHistoryChartPanel.h"
+#include "QDEGeometricPanel.h"
 #include "QDEOpenBoxPanel.h"
 #include "QDEPeakPanel.h"
 #include "QDESolutionTabPanel.h"
@@ -88,6 +89,7 @@ void GPA434Lab3DESolver::establishConnections()
 
 void GPA434Lab3DESolver::addSolutionPanels()
 {
-    // mSolutionTabPanel->addSolutionPanel(new QDEPeakPanel);
+    //mSolutionTabPanel->addSolutionPanel(new QDEPeakPanel);
     mSolutionTabPanel->addSolutionPanel(new QDEOpenBoxPanel);
+    mSolutionTabPanel->addSolutionPanel(new QDEGeometricPanel);
 }

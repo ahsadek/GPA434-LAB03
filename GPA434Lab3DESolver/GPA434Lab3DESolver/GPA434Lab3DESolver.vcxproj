@@ -110,17 +110,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LShapeBuilder.cpp" />
+    <ClCompile Include="PolygonBuilder.cpp" />
     <ClCompile Include="QDEAdapter.cpp" />
     <ClCompile Include="QDEBestResultPanel.cpp" />
     <ClCompile Include="QDEControllerPanel.cpp" />
     <ClCompile Include="QDEEngineParametersPanel.cpp" />
     <ClCompile Include="QDEHistoryChartPanel.cpp" />
+    <ClCompile Include="QDEGeometricPanel.cpp" />
     <ClCompile Include="QDEOpenBoxPanel.cpp" />
     <ClCompile Include="QDEPeakPanel.cpp" />
     <ClCompile Include="QDESolutionPanel.cpp" />
     <ClCompile Include="QDESolutionTabPanel.cpp" />
     <ClCompile Include="QElidedLabel.cpp" />
     <ClCompile Include="QImageViewer.cpp" />
+    <ClCompile Include="RectangleBuilder.cpp" />
+    <ClCompile Include="TriangleBuilder.cpp" />
     <QtRcc Include="GPA434Lab3DESolver.qrc" />
     <QtUic Include="GPA434Lab3DESolver.ui" />
     <QtMoc Include="GPA434Lab3DESolver.h" />
@@ -143,6 +148,9 @@
     <QtMoc Include="QDEHistoryChartPanel.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="QDEGeometricPanel.h" />
+  </ItemGroup>
+  <ItemGroup>
     <QtMoc Include="QDEOpenBoxPanel.h" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +167,12 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QImageViewer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LShapeBuilder.h" />
+    <ClInclude Include="PolygonBuilder.h" />
+    <ClInclude Include="RectangleBuilder.h" />
+    <ClInclude Include="TriangleBuilder.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
