@@ -379,10 +379,14 @@ de::EngineParameters QDESmileyPanel::SmileyStrategy::engineParameters() const
 {
     size_t const populationSize{ 100 };
     size_t const generationCount{ 800 };
+    double const mutationFactor{ 0.35 };
+    double const crossoverRate{ 0.80 };
 
     de::EngineParameters parameters;
     parameters.setPopulationSize(populationSize);
     parameters.setMaxGeneration(generationCount);
+    parameters.setMutationFactor(mutationFactor);
+    parameters.setCrossoverRate(crossoverRate);
     return parameters;
 }
 

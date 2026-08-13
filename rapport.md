@@ -257,7 +257,9 @@ exactement la référence. Justifications :
 
 Les paramètres recommandés sont une population de `100` solutions et `800`
 générations : l'espace à quatorze dimensions est nettement plus vaste que
-celui des problèmes précédents.
+celui des problèmes précédents. Le facteur de mutation `f = 0.35` et le taux
+de croisement `R = 0.80` sont ceux qui ont donné la meilleure convergence lors
+de nos essais.
 
 ## Diagramme de cas d'utilisation UML
 
