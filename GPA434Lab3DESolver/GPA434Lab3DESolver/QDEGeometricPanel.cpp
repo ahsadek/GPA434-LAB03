@@ -1,6 +1,6 @@
 // Fichier : QDEGeometricPanel.cpp
 // GPA434 - Laboratoire 3
-// Création : Équipe GPA434, 2026/08/02
+// Création : Frederic Tchouanguep, Ahmed Sadek, Paul Ayoub, 2026/08/03
 // Définition du panneau et de la stratégie d'optimisation géométrique.
 
 #include "QDEGeometricPanel.h"
@@ -30,7 +30,13 @@
 #include <algorithm>
 #include <cmath>
 #include <format>
-#include <limits>
+
+
+QColor const QDEGeometricPanel::sBackgroundColor{ 248, 248, 248 };
+QColor const QDEGeometricPanel::sPopulationColor{ 90, 90, 90, 110 };
+QColor const QDEGeometricPanel::sBestSolutionColor{ 20, 100, 210 };
+QColor const QDEGeometricPanel::sObstacleColor{ 210, 35, 35 };
+QColor const QDEGeometricPanel::sCanvasBorderColor{ 30, 30, 30 };
 
 
 QDEGeometricPanel::QDEGeometricPanel(QWidget * parent)
@@ -72,10 +78,7 @@ QDEGeometricPanel::QDEGeometricPanel(QWidget * parent)
 
     connect(mShapeComboBox,
             static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, [this]() {
-        drawVisualization(de::Population{});
-        emit parameterChanged();
-    });
+            this, &QDEGeometricPanel::shapeSelectionChanged);
     connect(mObstacleSpinBox,
             static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
             this, &QDEGeometricPanel::regenerateObstacles);
@@ -93,6 +96,12 @@ de::SolutionStrategy* QDEGeometricPanel::buildSolution() const
 void QDEGeometricPanel::updateVisualization(QDEAdapter const & deAdapter)
 {
     drawVisualization(deAdapter.actualPopulation());
+}
+
+void QDEGeometricPanel::shapeSelectionChanged()
+{
+    drawVisualization(de::Population{});
+    emit parameterChanged();
 }
 
 void QDEGeometricPanel::regenerateObstacles()
@@ -127,23 +136,23 @@ void QDEGeometricPanel::drawVisualization(de::Population const & population)
     QSize imageSize(static_cast<int>(mCanvasSize.width()),
                     static_cast<int>(mCanvasSize.height()));
     QPixmap pixmap(imageSize);
-    pixmap.fill(QColor(248, 248, 248));
+    pixmap.fill(sBackgroundColor);
 
     QPainter painter(&pixmap);
     painter.setRenderHint(QPainter::Antialiasing);
 
     QPolygonF basePolygon{ selectedPolygon() };
-    QPen populationPen(QColor(90, 90, 90, 110));
-    populationPen.setWidthF(1.0);
+    QPen populationPen(sPopulationColor);
+    populationPen.setWidthF(sPopulationPenWidth);
     painter.setPen(populationPen);
     painter.setBrush(Qt::NoBrush);
 
     size_t bestIndex{};
-    double bestFitness{ std::numeric_limits<double>::lowest() };
+    double bestFitness{};
     bool bestFound{};
 
     for (size_t i{}; i < population.size(); ++i) {
-        if (population[i].size() != 4) {
+        if (population[i].size() != sSolutionDimensionCount) {
             continue;
         }
 
@@ -156,27 +165,27 @@ void QDEGeometricPanel::drawVisualization(de::Population const & population)
     }
 
     if (bestFound) {
-        QPen bestPen(QColor(20, 100, 210));
-        bestPen.setWidthF(4.0);
+        QPen bestPen(sBestSolutionColor);
+        bestPen.setWidthF(sBestSolutionPenWidth);
         painter.setPen(bestPen);
         painter.drawPolygon(GeometricStrategy::transformPolygon(basePolygon,
                                                                   population[bestIndex]));
     }
 
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(210, 35, 35));
-    double const obstacleRadius{ 3.5 };
+    painter.setBrush(sObstacleColor);
     for (QPointF const & obstacle : mObstacles) {
-        painter.drawEllipse(obstacle, obstacleRadius, obstacleRadius);
+        painter.drawEllipse(obstacle, sObstacleRadius, sObstacleRadius);
     }
 
-    QPen canvasPen(QColor(30, 30, 30));
-    canvasPen.setWidthF(2.0);
+    QPen canvasPen(sCanvasBorderColor);
+    canvasPen.setWidthF(sCanvasBorderPenWidth);
     painter.setPen(canvasPen);
     painter.setBrush(Qt::NoBrush);
-    painter.drawRect(QRectF(1.0, 1.0,
-                            mCanvasSize.width() - 2.0,
-                            mCanvasSize.height() - 2.0));
+    double const borderInset{ sCanvasBorderPenWidth / 2.0 };
+    painter.drawRect(QRectF(borderInset, borderInset,
+                            mCanvasSize.width() - sCanvasBorderPenWidth,
+                            mCanvasSize.height() - sCanvasBorderPenWidth));
 
     mVisualizationLabel->setPixmap(pixmap);
 }
@@ -200,7 +209,7 @@ QDEGeometricPanel::GeometricStrategy::GeometricStrategy(
     double const canvasSizeLimit{ std::hypot(mCanvasSize.width(), mCanvasSize.height()) };
     double const maximumScale{ polygonSize > 0.0 ? canvasSizeLimit / polygonSize : 0.0 };
 
-    mSolutionDomain.resize(4);
+    mSolutionDomain.resize(sSolutionDimensionCount);
     mSolutionDomain[0].set(0.0, mCanvasSize.width());
     mSolutionDomain[1].set(0.0, mCanvasSize.height());
     mSolutionDomain[2].set(0.0, 360.0);
@@ -262,10 +271,9 @@ double QDEGeometricPanel::GeometricStrategy::process(de::Solution const & soluti
 
 bool QDEGeometricPanel::GeometricStrategy::isValid(QPolygonF const & polygon) const
 {
-    double const tolerance{ 1.0e-7 };
     QRectF canvasRect(QPointF(0.0, 0.0), mCanvasSize);
-    QRectF toleratedCanvas{ canvasRect.adjusted(-tolerance, -tolerance,
-                                                 tolerance, tolerance) };
+    QRectF toleratedCanvas{ canvasRect.adjusted(-sGeometryTolerance, -sGeometryTolerance,
+                                                 sGeometryTolerance, sGeometryTolerance) };
 
     if (!toleratedCanvas.contains(polygon.boundingRect())) {
         return false;
@@ -291,8 +299,7 @@ bool QDEGeometricPanel::GeometricStrategy::isOnBoundary(
     QPointF const & point,
     QPolygonF const & polygon) const
 {
-    double const tolerance{ 1.0e-7 };
-    double const toleranceSquared{ tolerance * tolerance };
+    double const toleranceSquared{ sGeometryTolerance * sGeometryTolerance };
 
     for (qsizetype i{}; i < polygon.size(); ++i) {
         QPointF const start{ polygon[i] };
@@ -306,12 +313,13 @@ bool QDEGeometricPanel::GeometricStrategy::isOnBoundary(
         }
 
         double const crossProduct{ edge.x() * offset.y() - edge.y() * offset.x() };
-        if (std::abs(crossProduct) > tolerance * std::sqrt(lengthSquared)) {
+        if (std::abs(crossProduct) > sGeometryTolerance * std::sqrt(lengthSquared)) {
             continue;
         }
 
         double const dotProduct{ offset.x() * edge.x() + offset.y() * edge.y() };
-        if (dotProduct >= -tolerance && dotProduct <= lengthSquared + tolerance) {
+        if (dotProduct >= -sGeometryTolerance
+            && dotProduct <= lengthSquared + sGeometryTolerance) {
             return true;
         }
     }

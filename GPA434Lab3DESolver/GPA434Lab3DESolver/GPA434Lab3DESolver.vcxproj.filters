@@ -85,6 +85,18 @@
     <ClCompile Include="LShapeBuilder.cpp">
       <Filter>Source Files\ProblemToSolveSubPanels</Filter>
     </ClCompile>
+    <ClCompile Include="QDESmileyPanel.cpp">
+      <Filter>Source Files\ProblemToSolveSubPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="FaceShape.cpp">
+      <Filter>Source Files\ProblemToSolveSubPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleShape.cpp">
+      <Filter>Source Files\ProblemToSolveSubPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="HyperbolaShape.cpp">
+      <Filter>Source Files\ProblemToSolveSubPanels</Filter>
+    </ClCompile>
     <ClCompile Include="QDEBestResultPanel.cpp">
       <Filter>Source Files\ApplicationPanels</Filter>
     </ClCompile>
@@ -123,6 +135,9 @@
     <QtMoc Include="QDEGeometricPanel.h">
       <Filter>Header Files\ProblemToSolveSubPanels</Filter>
     </QtMoc>
+    <QtMoc Include="QDESmileyPanel.h">
+      <Filter>Header Files\ProblemToSolveSubPanels</Filter>
+    </QtMoc>
     <QtMoc Include="QDEBestResultPanel.h">
       <Filter>Header Files\ApplicationPanels</Filter>
     </QtMoc>
@@ -154,6 +169,15 @@
       <Filter>Header Files\ProblemToSolveSubPanels</Filter>
     </ClInclude>
     <ClInclude Include="LShapeBuilder.h">
+      <Filter>Header Files\ProblemToSolveSubPanels</Filter>
+    </ClInclude>
+    <ClInclude Include="FaceShape.h">
+      <Filter>Header Files\ProblemToSolveSubPanels</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleShape.h">
+      <Filter>Header Files\ProblemToSolveSubPanels</Filter>
+    </ClInclude>
+    <ClInclude Include="HyperbolaShape.h">
       <Filter>Header Files\ProblemToSolveSubPanels</Filter>
     </ClInclude>
   </ItemGroup>

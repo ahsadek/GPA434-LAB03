@@ -4,12 +4,13 @@
 
 // Fichier : QDEGeometricPanel.h
 // GPA434 - Laboratoire 3
-// Création : Équipe GPA434, 2026/08/02
+// Création : Frederic Tchouanguep, Ahmed Sadek, Paul Ayoub, 2026/08/03
 // Panneau et stratégie du problème d'optimisation géométrique.
 
 #include "PolygonBuilder.h"
 #include "QDESolutionPanel.h"
 
+#include <QColor>
 #include <QPolygonF>
 #include <QSizeF>
 
@@ -45,6 +46,7 @@ public slots:
     void updateVisualization(QDEAdapter const & deAdapter) override;
 
 private slots:
+    void shapeSelectionChanged();
     void regenerateObstacles();
 
 private:
@@ -61,6 +63,17 @@ private:
     static constexpr int sMinimumObstacleCount{ 0 };
     static constexpr int sMaximumObstacleCount{ 100 };
     static constexpr int sDefaultObstacleCount{ 25 };
+    static constexpr size_t sSolutionDimensionCount{ 4 };
+
+    static constexpr double sObstacleRadius{ 3.5 };
+    static constexpr double sPopulationPenWidth{ 1.0 };
+    static constexpr double sBestSolutionPenWidth{ 4.0 };
+    static constexpr double sCanvasBorderPenWidth{ 2.0 };
+    static QColor const sBackgroundColor;
+    static QColor const sPopulationColor;
+    static QColor const sBestSolutionColor;
+    static QColor const sObstacleColor;
+    static QColor const sCanvasBorderColor;
 
     PolygonBuilder const & selectedBuilder() const;
     QPolygonF selectedPolygon() const;
@@ -97,6 +110,8 @@ private:
     std::vector<QPointF> mObstacles;
     QPolygonF mBasePolygon;
     double mBaseArea;
+
+    static constexpr double sGeometryTolerance{ 1.0e-7 };
 
     bool isValid(QPolygonF const & polygon) const;
     bool isStrictlyInside(QPointF const & point, QPolygonF const & polygon) const;

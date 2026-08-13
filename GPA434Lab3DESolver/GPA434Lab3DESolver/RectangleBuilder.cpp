@@ -1,6 +1,6 @@
 // Fichier : RectangleBuilder.cpp
 // GPA434 - Laboratoire 3
-// Création : Équipe GPA434, 2026/08/02
+// Création : Frederic Tchouanguep, Ahmed Sadek, Paul Ayoub, 2026/08/02
 // Définition du rectangle normalisé.
 
 #include "RectangleBuilder.h"

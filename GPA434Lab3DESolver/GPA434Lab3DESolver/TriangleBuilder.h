@@ -4,7 +4,7 @@
 
 // Fichier : TriangleBuilder.h
 // GPA434 - Laboratoire 3
-// Création : Équipe GPA434, 2026/08/02
+// Création : Frederic Tchouanguep, Ahmed Sadek, Paul Ayoub, 2026/08/01
 // Créateur d'un triangle normalisé.
 
 #include "PolygonBuilder.h"

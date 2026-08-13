@@ -14,6 +14,7 @@
 #include "QDEGeometricPanel.h"
 #include "QDEOpenBoxPanel.h"
 #include "QDEPeakPanel.h"
+#include "QDESmileyPanel.h"
 #include "QDESolutionTabPanel.h"
 
 
@@ -92,4 +93,5 @@ void GPA434Lab3DESolver::addSolutionPanels()
     //mSolutionTabPanel->addSolutionPanel(new QDEPeakPanel);
     mSolutionTabPanel->addSolutionPanel(new QDEOpenBoxPanel);
     mSolutionTabPanel->addSolutionPanel(new QDEGeometricPanel);
+    mSolutionTabPanel->addSolutionPanel(new QDESmileyPanel);
 }

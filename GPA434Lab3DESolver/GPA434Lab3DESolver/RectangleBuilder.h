@@ -4,7 +4,7 @@
 
 // Fichier : RectangleBuilder.h
 // GPA434 - Laboratoire 3
-// Création : Équipe GPA434, 2026/08/02
+// Création : Frederic Tchouanguep, Ahmed Sadek, Paul Ayoub, 2026/08/02
 // Créateur d'un rectangle normalisé.
 
 #include "PolygonBuilder.h"

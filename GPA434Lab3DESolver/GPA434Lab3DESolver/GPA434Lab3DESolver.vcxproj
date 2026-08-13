@@ -112,6 +112,10 @@
   <ItemGroup>
     <ClCompile Include="LShapeBuilder.cpp" />
     <ClCompile Include="PolygonBuilder.cpp" />
+    <ClCompile Include="QDESmileyPanel.cpp" />
+    <ClCompile Include="FaceShape.cpp" />
+    <ClCompile Include="CircleShape.cpp" />
+    <ClCompile Include="HyperbolaShape.cpp" />
     <ClCompile Include="QDEAdapter.cpp" />
     <ClCompile Include="QDEBestResultPanel.cpp" />
     <ClCompile Include="QDEControllerPanel.cpp" />
@@ -149,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QDEGeometricPanel.h" />
+    <QtMoc Include="QDESmileyPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QDEOpenBoxPanel.h" />
@@ -171,6 +176,9 @@
   <ItemGroup>
     <ClInclude Include="LShapeBuilder.h" />
     <ClInclude Include="PolygonBuilder.h" />
+    <ClInclude Include="FaceShape.h" />
+    <ClInclude Include="CircleShape.h" />
+    <ClInclude Include="HyperbolaShape.h" />
     <ClInclude Include="RectangleBuilder.h" />
     <ClInclude Include="TriangleBuilder.h" />
   </ItemGroup>

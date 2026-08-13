@@ -4,7 +4,7 @@
 
 // Fichier : LShapeBuilder.h
 // GPA434 - Laboratoire 3
-// Création : Équipe GPA434, 2026/08/02
+// Création : Frederic Tchouanguep, Ahmed Sadek, Paul Ayoub, 2026/08/02
 // Créateur d'un polygone concave en forme de L.
 
 #include "PolygonBuilder.h"
