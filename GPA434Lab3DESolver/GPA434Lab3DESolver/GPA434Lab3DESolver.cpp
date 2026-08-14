@@ -90,7 +90,11 @@ void GPA434Lab3DESolver::establishConnections()
 
 void GPA434Lab3DESolver::addSolutionPanels()
 {
+    // Panneau retiré volontairement: depuis la mise à jour de Qt, ce panneau génère
+    // un avertissement de compilation. Nous préférons une compilation sans warning.
+
     //mSolutionTabPanel->addSolutionPanel(new QDEPeakPanel);
+
     mSolutionTabPanel->addSolutionPanel(new QDEOpenBoxPanel);
     mSolutionTabPanel->addSolutionPanel(new QDEGeometricPanel);
     mSolutionTabPanel->addSolutionPanel(new QDESmileyPanel);
