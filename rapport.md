@@ -4,11 +4,11 @@
 
 Équipe :
 
-- Frederic Tchouanguep (matricule) <!-- matricule à compléter -->
-- Ahmed Sadek (matricule) <!-- matricule à compléter -->
-- Paul Ayoub (matricule) <!-- matricule à compléter -->
+- Frederic Tchouanguep (TCHF12028409)
+- Ahmed Sadek (SADA63290301)
+- Paul Ayoub (AYOP28099900)
 
-Date : 2026/08/13 <!-- à ajuster à la remise -->
+Date : 2026/08/13
 
 ---
 
