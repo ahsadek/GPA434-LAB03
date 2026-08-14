@@ -14,29 +14,6 @@ Date : 2026/08/13
 
 # Problème 1 — Optimisation géométrique
 
-## Choix de conception
-
-Le problème est représenté par un panneau graphique et une stratégie de résolution, comme dans `QDEOpenBoxPanel`.
-
-- `QDEGeometricPanel` configure le problème et dessine la population.
-- `QDEGeometricPanel::GeometricStrategy` définit le domaine et la fonction objective.
-- `PolygonBuilder` fournit l'interface commune servant à créer les formes.
-- `TriangleBuilder`, `RectangleBuilder` et `LShapeBuilder` créent les trois formes offertes.
-
-`buildSolution()` transmet à la stratégie une copie du canevas, des obstacles et du polygone sélectionné. Ces données ne changent donc pas pendant l'évolution.
-
-## Formes retenues
-
-Les formes sont définies autour de l'origine. Elles conservent ainsi leurs proportions pendant la mise à l'échelle.
-
-| Forme | Créateur | Sommets |
-|---|---|---|
-| Triangle | `TriangleBuilder` | `(-0.5, 0.5)`, `(0, -0.5)`, `(0.5, 0.5)` |
-| Rectangle | `RectangleBuilder` | `(-0.5, -0.35)`, `(0.5, -0.35)`, `(0.5, 0.35)`, `(-0.5, 0.35)` |
-| Forme en L | `LShapeBuilder` | `(-0.5, -0.5)`, `(-0.1, -0.5)`, `(-0.1, 0.1)`, `(0.5, 0.1)`, `(0.5, 0.5)`, `(-0.5, 0.5)` |
-
-Le triangle et le rectangle sont deux cas convexes simples. La forme en L vérifie aussi le comportement avec un polygone concave.
-
 ## Diagramme de classes UML
 
 ```plantuml
@@ -121,6 +98,8 @@ LShapeBuilder --|> PolygonBuilder
 QDEGeometricPanel *-- "3" PolygonBuilder
 QDEGeometricPanel ..> GeometricStrategy : crée (buildSolution)
 QDEGeometricPanel ..> QDEAdapter : visualise
+
+note bottom of PolygonBuilder : Approche polymorphique créée pour ce problème :\nle panneau manipule les formes uniquement via cette interface.
 @enduml
 ```
 
@@ -150,27 +129,7 @@ solution invalide : 0
 
 La stratégie utilise `de::OptimizationMaximization` et `de::FitnessIdentity`, comme le problème de la boîte ouverte.
 
-Les paramètres recommandés sont une population de `60` solutions et `400` générations, ce qui reste raisonnable pour un problème à quatre dimensions.
-
-## Interface et visualisation
-
-Le panneau offre une liste de formes, le nombre d'obstacles et un bouton pour régénérer leur position. Le canevas conserve une taille fixe de `800 × 600`. Les obstacles sont générés avant la simulation et copiés dans la stratégie.
-
-La visualisation montre le canevas, les obstacles, toute la population en gris et le meilleur candidat en bleu. Les paramètres du panneau sont déjà désactivés pendant l'évolution par les connexions de l'application principale.
-
-## Organisation des fichiers
-
-La norme GPA434 demande un duo de fichiers par classe :
-
-```text
-PolygonBuilder.h/.cpp
-TriangleBuilder.h/.cpp
-RectangleBuilder.h/.cpp
-LShapeBuilder.h/.cpp
-QDEGeometricPanel.h/.cpp
-```
-
-`GeometricStrategy` reste imbriquée dans `QDEGeometricPanel`, suivant la structure de `QDEOpenBoxPanel::OpenBoxStrategy`.
+Les paramètres recommandés sont une population de `60` solutions et `400` générations, ce qui reste raisonnable pour un problème à quatre dimensions. Le facteur de mutation `f = 0.25` et le taux de croisement `R = 0.75` sont ceux qui ont donné la meilleure convergence lors de nos essais.
 
 ---
 
@@ -341,8 +300,11 @@ class QDESmileyPanel {
   -referenceChanged()
   -randomizeReference()
   -referenceParameters() : vector<double>
+  -buildScrollBarLayout(scrollBar, min, max, défaut) : QHBoxLayout*
+  -drawVisualization(population, génération)
   -{static} buildFaceShapes(parameters)
   -{static} drawFace(painter, parameters, sampleCount)
+  -{static} randomizeScrollBar(scrollBar)
 }
 
 class "QDESmileyPanel::SmileyStrategy" as SmileyStrategy {
@@ -365,49 +327,7 @@ HyperbolaShape --|> FaceShape
 QDESmileyPanel ..> SmileyStrategy : crée (buildSolution)
 QDESmileyPanel ..> FaceShape : construit (1 tête, 2 yeux, 1 bouche)
 SmileyStrategy ..> FaceShape : échantillonne et évalue
+
+note bottom of FaceShape : Approche polymorphique créée pour ce problème :\nsamplePoints sert la fonction objective, draw sert la visualisation.
 @enduml
 ```
-
-## Approche polymorphique
-
-La hiérarchie `FaceShape` est l'approche polymorphique propre à ce problème.
-Chaque trait offre deux services virtuels aux responsabilités séparées :
-
-- `samplePoints` sert la stratégie : c'est la partie mathématique utilisée par
-  la fonction objective;
-- `draw` sert le panneau : chaque trait sait comment se dessiner (un cercle se
-  ferme avec `drawPolygon`, la bouche reste ouverte avec `drawPolyline`).
-
-Comme `draw` réutilise `samplePoints`, la courbe affichée est exactement celle
-qui est évaluée. Le panneau et la stratégie parcourent les traits uniquement à
-travers l'interface abstraite : ajouter un nouveau trait (une ellipse, un arc)
-ne demanderait aucune modification du code existant.
-
-## Interface et visualisation
-
-Le panneau reprend le style du panneau de la boîte ouverte : des barres de
-défilement construites par une méthode utilitaire commune, chacune reliée à un
-connecteur nommé. Tout changement de paramètre redessine la référence et émet
-`parameterChanged`, ce qui réinitialise la simulation.
-
-La visualisation montre côte à côte la référence (vert) et la population
-complète (gris pâle), la meilleure solution en bleu, puis une ligne
-d'information sous le canevas de droite avec l'erreur totale de la meilleure
-solution et la génération courante — la population entière et deux
-informations complémentaires, tel que requis pour une équipe de trois.
-L'erreur détaillée par trait reste disponible dans le panneau des solutions
-obtenues (`toString`). Le dessin de chaque visage est rogné aux limites de son
-canevas : les traits qui en débordent existent toujours, seule leur partie
-intérieure est affichée.
-
-## Organisation des fichiers
-
-```text
-FaceShape.h/.cpp
-CircleShape.h/.cpp
-HyperbolaShape.h/.cpp
-QDESmileyPanel.h/.cpp
-```
-
-`SmileyStrategy` reste imbriquée dans `QDESmileyPanel`, suivant la structure
-de `QDEOpenBoxPanel::OpenBoxStrategy` et de `QDEGeometricPanel`.
